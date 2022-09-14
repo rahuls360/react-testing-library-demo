@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
-import { renderWithRouter } from './test-utils';
+import { renderWithMemoryRouter, renderWithRouter } from './test-utils';
 
 import App from './App';
 
@@ -33,6 +33,14 @@ test('should redirect to /page1 on clicking page1 link', () => {
   const linkElement = screen.getByText(/Page 1/i);
   expect(linkElement).toBeInTheDocument();
   user.click(linkElement);
+  const page1Element = screen.getByText(/Welcome to Page 1/);
+  expect(page1Element).toBeInTheDocument();
+});
+
+test('should render /page1 if directly visited', () => {
+  const route = '/page1';
+  renderWithMemoryRouter(<App />, { routes: [route] });
+
   const page1Element = screen.getByText(/Welcome to Page 1/);
   expect(page1Element).toBeInTheDocument();
 });
