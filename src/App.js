@@ -1,11 +1,8 @@
 import './App.css';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import MyRoutes from './MyRoutes';
 
 function App() {
-  const [theme, setTheme] = useState('light');
-  const handleChangeTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
   return (
     <div className='App'>
       <header>
@@ -15,24 +12,20 @@ function App() {
         />
         <ul>
           <li>
-            <a href='/'>Home</a>
+            <Link to='/'>Home</Link>
           </li>
           <li>
-            <a href='/page1'>Page 1</a>
+            <Link to='/page1'>Page 1</Link>
           </li>
           <li>
-            <a href='/page2'>Page 2</a>
+            <Link to='/page2'>Page 2</Link>
           </li>
           <li>
-            <a href='/page3'>Page 3</a>
+            <Link to='/page3'>Page 3</Link>
           </li>
         </ul>
       </header>
-      <main>
-        <h1>Welcome to the website</h1>
-        <button onClick={handleChangeTheme}>Toggle theme</button>
-        <div>Current theme: {theme}</div>
-      </main>
+      <MyRoutes />
     </div>
   );
 }

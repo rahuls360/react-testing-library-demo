@@ -1,16 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
+import { renderWithRouter } from './test-utils';
 
 import App from './App';
 
 test('renders welcome text', () => {
-  render(<App />);
+  renderWithRouter(<App />);
   const linkElement = screen.getByText(/Welcome to the website/i);
   expect(linkElement).toBeInTheDocument();
 });
 
 test('should change the theme on toggle', () => {
-  render(<App />);
+  renderWithRouter(<App />);
 
   const oldTheme = screen.getByText(/light/);
   expect(oldTheme).toBeInTheDocument();
@@ -27,11 +28,11 @@ test('should change the theme on toggle', () => {
   expect(newerTheme).toBeInTheDocument();
 });
 
-// test('should redirect to /page1 on clicking page1 link', () => {
-//   renderWithRouter(<App />);
-// const linkElement = screen.getByText(/Page 1/i);
-// expect(linkElement).toBeInTheDocument();
-// user.click(linkElement);
-// const page1Element = screen.getByText(/Page1/);
-// expect(page1Element).toBeInTheDocument();
-// });
+test('should redirect to /page1 on clicking page1 link', () => {
+  renderWithRouter(<App />);
+  const linkElement = screen.getByText(/Page 1/i);
+  expect(linkElement).toBeInTheDocument();
+  user.click(linkElement);
+  const page1Element = screen.getByText(/Welcome to Page 1/);
+  expect(page1Element).toBeInTheDocument();
+});
